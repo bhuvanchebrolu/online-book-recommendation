@@ -1,0 +1,46 @@
+/* Container for search row */
+.searchRow {
+  display: flex;
+  align-items: center;
+  gap: 12px; /* slightly more space for readability */
+  margin: 20px 0;
+  flex-wrap: wrap; /* handles smaller screens */
+}
+
+/* Input field */
+.searchInput {
+  padding: 8px 14px; /* slightly bigger for comfort */
+  border: 1px solid #b0b0b0; /* softer than #ccc */
+  border-radius: 8px;
+  width: 220px; /* wider for academic site forms */
+  font-size: 14px;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.searchInput:focus {
+  outline: none;
+  border-color: #094074; /* matches button */
+  box-shadow: 0 0 5px rgba(9, 64, 116, 0.3);
+}
+
+/* Button */
+.searchRow button {
+  background-color: #094074;
+  color: #fff;
+  border: none;
+  padding: 8px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.searchRow button:hover {
+  background-color: #0c508e; /* slightly lighter on hover */
+  transform: translateY(-1px);
+}
+
+.searchRow button:active {
+  transform: translateY(1px);
+}

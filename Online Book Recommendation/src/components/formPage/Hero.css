@@ -1,0 +1,64 @@
+/* MAIN HEADING */
+.heroHeading {
+  text-align: center;
+  font-size: 2.4rem;
+  font-weight: 700;
+  margin-top: 25px;
+  margin-bottom: 10px;
+
+  color: #003366;
+  letter-spacing: 0.5px;
+
+  /* subtle fade entry */
+  animation: fadeIn 0.3s ease-out;
+}
+
+/* INSTRUCTIONS PANEL */
+.heroInstrn {
+  width: min(90%, 950px);
+  margin: 50px auto;
+
+  background: #f6f8fc;
+  padding: 28px 28px;
+
+  border-left: 6px solid #003366;
+  border-radius: 8px;
+
+  line-height: 1.65;
+  font-size: 1rem;
+  color: #2c2c2c;
+
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+  transition: box-shadow 0.25s ease;
+}
+
+.heroInstrn:hover {
+  box-shadow: 0 3px 14px rgba(0, 0, 0, 0.08);
+}
+
+/* EACH LINE/POINT */
+.heroInstrn div {
+  margin-bottom: 12px;
+  padding: 6px 4px;
+  border-radius: 4px;
+  transition: background 0.2s ease, padding-left 0.2s ease;
+}
+
+.heroInstrn div:hover {
+  background: #e8eef6;
+  padding-left: 10px;
+}
+
+/* SIGNATURE */
+.libraryHOD {
+  font-weight: 700;
+  color: #003366;
+  font-size: 1.05rem;
+  margin-top: 14px;
+}
+
+/* FADE IN ANIMATION */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(5px); }
+  to   { opacity: 1; transform: translateY(0); }
+}

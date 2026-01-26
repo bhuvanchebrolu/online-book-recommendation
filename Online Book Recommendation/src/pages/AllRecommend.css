@@ -1,0 +1,20 @@
+.homeContainer {
+  width: min(90%, 1100px);       /* cleaner max width */
+  margin: 0 auto;
+  padding-top: 28px;
+
+  font-family: "Inter", Arial, sans-serif;
+  color: #1f1f1f;
+
+  /* optional: subtle fade-in */
+  animation: fadeIn 0.3s ease-out;
+}
+
+.homeHeading {
+  font-size: 30px;
+  font-weight: 700;
+  color: #003366;               /* academic blue */
+  margin-bottom: 20px;
+
+  letter-spacing: 0.3px;
+}

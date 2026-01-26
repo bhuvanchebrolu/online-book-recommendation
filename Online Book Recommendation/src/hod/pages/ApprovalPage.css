@@ -1,0 +1,17 @@
+.hodContainer {
+  max-width: 1100px;
+  margin: 30px auto;
+  padding: 30px 35px;
+
+  background: #ffffff;
+  border-radius: 12px;
+
+  /* Soft shadow for depth */
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+
+  /* Subtle border for structure */
+  border: 1px solid #eaeaea;
+
+  /* Smooth fade animation when page loads */
+  animation: fadeIn 0.4s ease;
+}

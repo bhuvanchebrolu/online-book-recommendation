@@ -1,0 +1,150 @@
+/* TABLE WRAPPER */
+.recDiv {
+  margin-top: 20px;
+}
+
+/* MAIN TABLE */
+.recTable {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: #ffffff;
+
+  font-size: 14px;
+  border-radius: 10px;
+  overflow: hidden;
+
+  /* Cleaner, smoother shadow */
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.05);
+  transition: box-shadow 0.25s ease, transform 0.2s ease;
+}
+
+.recTable:hover {
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+  transform: translateY(-1px);
+}
+
+/* ACTION BUTTONS BAR */
+.tableActions {
+  margin-bottom: 14px;
+  display: flex;
+  gap: 12px;
+}
+
+.tableActions button {
+  padding: 8px 15px;
+  border: none;
+  background-color: #0b63af;
+  color: white;
+
+  font-size: 13px;
+  font-weight: 500;
+  border-radius: 6px;
+
+  cursor: pointer;
+  transition: background 0.25s ease, transform 0.15s ease, box-shadow 0.2s ease;
+}
+
+.tableActions button:hover:not(:disabled) {
+  background-color: #084b86;
+  transform: translateY(-1.5px);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.12);
+}
+
+.tableActions button:active:not(:disabled) {
+  transform: translateY(0px);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+}
+
+.tableActions button:disabled {
+  background-color: #b8b8b8;
+  cursor: not-allowed;
+}
+
+/* TABLE HEADER */
+.recTable thead th {
+  text-align: left;
+  padding: 14px 18px;
+
+  background: linear-gradient(90deg, #003366, #002a55);
+  color: white;
+
+  font-size: 15px;
+  letter-spacing: 0.3px;
+  font-weight: 600;
+
+  border-bottom: 2px solid #002244;
+  user-select: none;
+}
+
+/* BODY ROWS */
+.recTable tbody tr {
+  transition: background-color 0.25s ease;
+}
+
+.recTable tbody tr:nth-child(even) {
+  background-color: #fafcff;   /* subtle zebra pattern */
+}
+
+.recTable tbody tr:hover {
+  background-color: #eef4ff;   /* more premium hover */
+}
+
+/* TABLE CELLS */
+.recTable td {
+  padding: 14px 18px;
+
+  border-bottom: 1px solid #e4e8f0;
+  vertical-align: top;
+
+  line-height: 1.55;
+  color: #333;
+  font-size: 14px;
+}
+
+/* LAST ROW */
+.recTable tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* SUMMARY TITLE */
+.summaryTitle {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1f1f1f;
+  margin-bottom: 4px;
+}
+
+/* SUMMARY BODY */
+.summaryDetails {
+  font-size: 13px;
+  color: #555;
+  line-height: 1.65;
+}
+
+/* SMALL TEXT */
+.summarySmall {
+  font-size: 12px;
+  color: #777;
+  margin-top: 6px;
+}
+
+/* EMPTY TABLE MESSAGE */
+.emptyRow {
+  text-align: center;
+  padding: 28px;
+  font-size: 15px;
+  color: #777;
+  background-color: #fafafa;
+}
+
+/* DEPARTMENT COLUMN STYLE */
+.deptCell {
+  font-weight: 600;
+  color: #0b3c73;
+}
+
+.deptCell.isEmpty {
+  color: #c40000;
+  font-weight: 600;
+}

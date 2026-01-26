@@ -1,0 +1,102 @@
+/* Table container */
+.hodTable {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: #fff;
+  margin-top: 15px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 14px;
+  color: #333;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+/* Table header */
+.hodTable th {
+  background: linear-gradient(90deg, #f3f6fb, #eaf1fb);
+  padding: 14px 16px;
+  text-align: left;
+  border-bottom: 2px solid #dce3e9;
+  font-weight: 700;
+  color: #094074;
+  letter-spacing: 0.5px;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+/* Table body cells */
+.hodTable td {
+  padding: 14px 16px;
+  border-bottom: 1px solid #f0f0f0;
+  vertical-align: top;
+  transition: background 0.3s;
+}
+
+/* Alternating row colors */
+.hodTable tr:nth-child(even) {
+  background-color: #f9fbff;
+}
+
+/* Hover effect */
+.hodTable tr:hover {
+  background-color: #e8f0fd;
+  transform: scale(1.002);
+}
+
+/* Summary text */
+.sumTitle {
+  font-weight: 600;
+  margin-bottom: 4px;
+  color: #094074;
+}
+
+.sumDetails {
+  font-size: 13px;
+  color: #555;
+  line-height: 1.5;
+}
+
+/* Status badges */
+.status {
+  font-weight: 600;
+  padding: 5px 12px;
+  border-radius: 16px;
+  display: inline-block;
+  font-size: 13px;
+  text-align: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Status colors with gradient */
+.status.Requested {
+  color: #444;
+  background: linear-gradient(135deg, #e0e0e0, #f5f5f5);
+}
+
+.status.Approved {
+  color: #155724;
+  background: linear-gradient(135deg, #d4edda, #b8e6c0);
+}
+
+.status.Declined {
+  color: #721c24;
+  background: linear-gradient(135deg, #f8d7da, #f4b6bc);
+}
+
+/* Responsive tweaks */
+@media (max-width: 768px) {
+  .hodTable th,
+  .hodTable td {
+    padding: 12px 10px;
+    font-size: 13px;
+  }
+
+  .status {
+    padding: 4px 10px;
+    font-size: 12px;
+  }
+}

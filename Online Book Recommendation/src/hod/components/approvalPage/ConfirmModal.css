@@ -1,0 +1,116 @@
+/* Modal overlay */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.35);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  animation: fadeIn 0.25s ease;
+}
+
+/* Modal box */
+.modalBox {
+  background: #fff;
+  width: 420px;
+  max-width: 90%;
+  border-radius: 12px;
+  padding: 24px 28px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+  animation: scaleIn 0.25s ease;
+  overflow: hidden;
+}
+
+/* Modal animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scaleIn {
+  from { transform: scale(0.95); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+/* Title */
+.modalTitle {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: #094074;
+}
+
+/* Message content */
+.modalMessage {
+  max-height: 200px;
+  overflow-y: auto;
+  margin-bottom: 24px;
+  font-size: 14px;
+  color: #333;
+  line-height: 1.5;
+  padding-right: 4px;
+}
+
+/* Custom scrollbar for modalMessage */
+.modalMessage::-webkit-scrollbar {
+  width: 6px;
+}
+.modalMessage::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 3px;
+}
+.modalMessage::-webkit-scrollbar-track {
+  background: #f0f0f0;
+}
+
+/* Lists inside modal */
+.modalMessage ul {
+  padding-left: 20px;
+}
+.modalMessage li {
+  margin-bottom: 6px;
+}
+
+/* Modal actions */
+.modalActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+/* Confirm button */
+.confirmBtn {
+  background: linear-gradient(135deg, #dc3545, #ff6b6b);
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.confirmBtn:hover {
+  background: linear-gradient(135deg, #e35b5b, #ff7a7a);
+  transform: translateY(-2px);
+}
+
+/* Cancel button */
+.cancelBtn {
+  background: #ccc;
+  color: #333;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.cancelBtn:hover {
+  background: #b3b3b3;
+  transform: translateY(-2px);
+}
