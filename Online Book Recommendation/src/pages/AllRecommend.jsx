@@ -1,32 +1,29 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import NewRecommendBtn from "../components/homePage/newRecommend";
 import RecommendTable from "../components/homePage/recommendTable";
-import "./AllRecommend.css";
 import SearchBar from "../components/homePage/SearchBar";
+import "./AllRecommend.css";
 import { useMessage } from "../context/MessageContext";
+import api from "../utils/axios";
 
 const AllRecommend = () => {
   const [recommendations, setRecommendations] = useState([]);
-  const [search ,setSearch]=useState("");
+  const [search, setSearch] = useState("");
+  const { showMessage } = useMessage();
 
-  const {showMessage}=useMessage();
   useEffect(() => {
-    axios
-      .get("http://localhost:8080/api/recommend")
+    api
+      .get("/api/recommend")
       .then((res) => {
-        console.log(res);
-        showMessage("All recommendations fetched","success"); 
+        showMessage("All recommendations fetched", "success");
         setRecommendations(res.data);
-        
-    }
-    )
+      })
       .catch((err) => console.log(err));
   }, []);
 
- const filteredRecommendations =
+  const filteredRecommendations =
     search.trim() === ""
-      ? recommendations 
+      ? recommendations
       : recommendations.filter((b) => {
           const text = `${b.title} ${b.author} ${b.dept} ${b.itemType}`.toLowerCase();
           return text.includes(search.toLowerCase());
@@ -34,10 +31,27 @@ const AllRecommend = () => {
 
   return (
     <div className="homeContainer">
-      <h2 className="homeHeading">Your Recommendations</h2>
-      <SearchBar setSearch={setSearch}/> 
-      <NewRecommendBtn />
-      <RecommendTable recommendations={filteredRecommendations} setRecommendations={setRecommendations} />
+      <div className="homeHeader">
+        <div>
+          <div className="homeHeader__badge">Faculty Portal</div>
+          <h2 className="homeHeading">Your Recommendations</h2>
+          <p className="homeSubtitle">
+            {recommendations.length > 0
+              ? `${recommendations.length} recommendation${recommendations.length !== 1 ? "s" : ""} submitted`
+              : "No recommendations yet"}
+          </p>
+        </div>
+        <NewRecommendBtn />
+      </div>
+
+      <div className="homeControls">
+        <SearchBar setSearch={setSearch} />
+      </div>
+
+      <RecommendTable
+        recommendations={filteredRecommendations}
+        setRecommendations={setRecommendations}
+      />
     </div>
   );
 };

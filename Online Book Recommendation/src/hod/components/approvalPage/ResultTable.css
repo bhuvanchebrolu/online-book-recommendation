@@ -1,102 +1,126 @@
-/* Table container */
+/* ── Table wrapper ──────────────────────────────────────────── */
+.tableWrap {
+  border: 1px solid #e8edf2;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+/* ── Table base ─────────────────────────────────────────────── */
 .hodTable {
   width: 100%;
-  border-collapse: separate;
-  border-spacing: 0;
-  background: #fff;
-  margin-top: 15px;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  font-size: 14px;
-  color: #333;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  border-collapse: collapse;
+  font-family: "Segoe UI", sans-serif;
+  font-size: 13px;
+  color: #1e293b;
+  table-layout: fixed;
 }
 
-/* Table header */
+/* ── Column widths ──────────────────────────────────────────── */
+.col-check  { width: 44px; }
+.col-book   { width: auto; }
+.col-prof   { width: 170px; }
+.col-date   { width: 110px; }
+.col-status { width: 110px; }
+
+/* ── Header ─────────────────────────────────────────────────── */
+.hodTable thead tr {
+  background: #f7f9fc;
+  border-bottom: 1px solid #e8edf2;
+}
+
 .hodTable th {
-  background: linear-gradient(90deg, #f3f6fb, #eaf1fb);
-  padding: 14px 16px;
+  padding: 12px 16px;
   text-align: left;
-  border-bottom: 2px solid #dce3e9;
-  font-weight: 700;
-  color: #094074;
+  font-size: 11px;
+  font-weight: 600;
+  color: #7a93ab;
   letter-spacing: 0.5px;
-  position: sticky;
-  top: 0;
-  z-index: 1;
+  text-transform: uppercase;
 }
 
-/* Table body cells */
+.hodTable th.col-check { text-align: center; }
+
+/* ── Body rows ──────────────────────────────────────────────── */
+.row {
+  border-bottom: 1px solid #f0f4f8;
+  transition: background 0.15s;
+}
+
+.row:last-child { border-bottom: none; }
+
+.row:hover { background: #f7f9fc; }
+
+.row--selected { background: #eef4fb; }
+.row--selected:hover { background: #e4edf8; }
+
+/* ── Cells ──────────────────────────────────────────────────── */
 .hodTable td {
   padding: 14px 16px;
-  border-bottom: 1px solid #f0f0f0;
   vertical-align: top;
-  transition: background 0.3s;
 }
 
-/* Alternating row colors */
-.hodTable tr:nth-child(even) {
-  background-color: #f9fbff;
-}
+.col-check { text-align: center; vertical-align: middle !important; }
 
-/* Hover effect */
-.hodTable tr:hover {
-  background-color: #e8f0fd;
-  transform: scale(1.002);
-}
-
-/* Summary text */
-.sumTitle {
+/* ── Book info ──────────────────────────────────────────────── */
+.bookTitle {
   font-weight: 600;
+  color: #1a3a5c;
   margin-bottom: 4px;
-  color: #094074;
+  line-height: 1.4;
 }
 
-.sumDetails {
-  font-size: 13px;
-  color: #555;
-  line-height: 1.5;
+.bookMeta {
+  font-size: 12px;
+  color: #7a93ab;
+  line-height: 1.6;
 }
 
-/* Status badges */
-.status {
-  font-weight: 600;
-  padding: 5px 12px;
-  border-radius: 16px;
-  display: inline-block;
-  font-size: 13px;
+/* ── Professor ──────────────────────────────────────────────── */
+.profName  { font-weight: 500; color: #1e293b; margin-bottom: 2px; }
+.profEmail { font-size: 12px; color: #7a93ab; }
+
+/* ── Date ───────────────────────────────────────────────────── */
+.col-date { color: #7a93ab; font-size: 12px; vertical-align: middle !important; }
+
+/* ── Empty state ────────────────────────────────────────────── */
+.emptyRow {
   text-align: center;
-  transition: all 0.3s ease;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  padding: 48px 16px !important;
+  color: #adb5bd;
+  font-size: 14px;
 }
 
-/* Status colors with gradient */
-.status.Requested {
-  color: #444;
-  background: linear-gradient(135deg, #e0e0e0, #f5f5f5);
+/* ── Status badges ──────────────────────────────────────────── */
+.badge {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 4px 10px;
+  border-radius: 6px;
+  white-space: nowrap;
 }
 
-.status.Approved {
-  color: #155724;
-  background: linear-gradient(135deg, #d4edda, #b8e6c0);
+.badge--requested {
+  background: #f0f4f8;
+  color: #4a6580;
+  border: 1px solid #d1dce6;
 }
 
-.status.Declined {
-  color: #721c24;
-  background: linear-gradient(135deg, #f8d7da, #f4b6bc);
+.badge--approved {
+  background: #e6f9ed;
+  color: #1f6e43;
+  border: 1px solid #b2dfcc;
 }
 
-/* Responsive tweaks */
+.badge--rejected {
+  background: #fde2e2;
+  color: #b00020;
+  border: 1px solid #f5c2c2;
+}
+
+/* ── Responsive ─────────────────────────────────────────────── */
 @media (max-width: 768px) {
-  .hodTable th,
-  .hodTable td {
-    padding: 12px 10px;
-    font-size: 13px;
-  }
-
-  .status {
-    padding: 4px 10px;
-    font-size: 12px;
-  }
+  .col-prof, .col-date { display: none; }
+  .col-status { width: 90px; }
 }

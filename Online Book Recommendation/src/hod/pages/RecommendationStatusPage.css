@@ -29,3 +29,16 @@
 
   text-transform: none;
 }
+.approvedHeaderRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.approvedHeaderRow h2 {
+  margin: 0;
+  text-align: left;
+}

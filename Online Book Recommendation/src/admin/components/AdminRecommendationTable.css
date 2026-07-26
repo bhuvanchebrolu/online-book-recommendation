@@ -1,0 +1,77 @@
+.adminTable {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #ffffff;
+  font-size: 14px;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+/* Header + cell base */
+.adminTable th,
+.adminTable td {
+  border: 1px solid #e5e7eb;
+  padding: 12px 14px;
+  vertical-align: top;
+}
+
+/* Academic blue header */
+.adminTable th {
+  background-color: #e8f0fe;
+  font-weight: 600;
+  color: #1e3a8a;
+  text-align: left;
+  white-space: nowrap;
+}
+
+/* Hover */
+.adminTable tbody tr:hover {
+  background-color: #f8fafc;
+}
+
+/* Empty state */
+.emptyRow {
+  text-align: center;
+  padding: 20px;
+  color: #6b7280;
+  font-style: italic;
+}
+
+/* Title */
+.title {
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 4px;
+  font-size: 0.95rem;
+}
+
+/* Compact metadata */
+.metaLine {
+  font-size: 0.85rem;
+  color: #374151;
+  line-height: 1.35;
+}
+
+/* Muted academic text */
+.metaLine.muted {
+  color: #6b7280;
+}
+
+/* Notes */
+.notesInline {
+  margin-top: 6px;
+  font-size: 0.8rem;
+  font-style: italic;
+  color: #4b5563;
+}
+
+/* Recommended by */
+.profName {
+  font-weight: 500;
+  color: #111827;
+}
+
+.profEmail {
+  font-size: 0.8rem;
+  color: #6b7280;
+}

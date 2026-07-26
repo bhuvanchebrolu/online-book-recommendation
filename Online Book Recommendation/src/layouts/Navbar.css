@@ -1,0 +1,268 @@
+/* ── Base ───────────────────────────────────────────────────── */
+.navbar {
+  width: 100%;
+  background: #ffffff;
+  border-bottom: 2px solid #e8edf2;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  font-family: "Segoe UI", sans-serif;
+}
+
+.navbar__inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 24px;
+  height: 68px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+/* ── Brand ──────────────────────────────────────────────────── */
+.navbar__brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.navbar__brand-icon { font-size: 26px; }
+
+.navbar__brand-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.navbar__brand-title {
+  font-size: 17px;
+  font-weight: 700;
+  color: #1a3a5c;
+  letter-spacing: 0.3px;
+}
+
+.navbar__brand-sub {
+  font-size: 11px;
+  color: #7a93ab;
+}
+
+/* ── Nav Links ──────────────────────────────────────────────── */
+.navbar__links {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  flex: 1;
+}
+
+.navbar__link {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #4a6580;
+  transition: background 0.18s, color 0.18s;
+  white-space: nowrap;
+  font-family: inherit;
+}
+
+.navbar__link:hover      { background: #eef3f8; color: #1a3a5c; }
+.navbar__link--active    { background: #e8f0f9; color: #1a3a5c; font-weight: 600; }
+
+/* ── Bell ───────────────────────────────────────────────────── */
+.navbar__bell {
+  position: relative;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  transition: background 0.18s;
+  line-height: 1;
+}
+
+.navbar__bell:hover       { background: #eef3f8; }
+.navbar__bell--active     { background: #fff3e0; }
+
+/* ── Badge ──────────────────────────────────────────────────── */
+.navbar__badge {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  background: #e53935;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  min-width: 18px;
+  height: 18px;
+  border-radius: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 4px;
+  pointer-events: none;
+}
+
+.navbar__badge--inline {
+  position: static;
+  display: inline-flex;
+  margin-left: 6px;
+  vertical-align: middle;
+}
+
+/* ── Right ──────────────────────────────────────────────────── */
+.navbar__right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+/* ── User ───────────────────────────────────────────────────── */
+.navbar__user {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.navbar__avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #1a3a5c, #2e6da4);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.navbar__user-info {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.3;
+}
+
+.navbar__user-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1a3a5c;
+}
+
+/* ── Role chip ──────────────────────────────────────────────── */
+.navbar__role {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  padding: 1px 6px;
+  border-radius: 4px;
+  width: fit-content;
+  text-transform: uppercase;
+}
+
+.navbar__role--student   { background: #e3f2fd; color: #1565c0; }
+.navbar__role--professor { background: #e8f5e9; color: #2e7d32; }
+.navbar__role--hod       { background: #fff3e0; color: #e65100; }
+.navbar__role--admin     { background: #fce4ec; color: #ad1457; }
+
+/* ── Logout ─────────────────────────────────────────────────── */
+.navbar__logout {
+  background: none;
+  border: 1.5px solid #c8d8e8;
+  color: #4a6580;
+  padding: 7px 16px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.18s;
+  font-family: inherit;
+  white-space: nowrap;
+}
+
+.navbar__logout:hover {
+  background: #fdecea;
+  border-color: #e57373;
+  color: #c62828;
+}
+
+/* ── Hamburger ──────────────────────────────────────────────── */
+.navbar__hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+  margin-left: auto;
+}
+
+.navbar__hamburger span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: #1a3a5c;
+  border-radius: 2px;
+  transition: all 0.2s;
+}
+
+/* ── Mobile Menu ────────────────────────────────────────────── */
+.navbar__mobile {
+  display: none;
+  flex-direction: column;
+  padding: 10px 20px 16px;
+  border-top: 1px solid #e8edf2;
+  gap: 2px;
+  background: #fff;
+}
+
+.navbar__mobile button {
+  background: none;
+  border: none;
+  text-align: left;
+  padding: 11px 12px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #4a6580;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.18s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.navbar__mobile button:hover { background: #eef3f8; color: #1a3a5c; }
+
+.navbar__mobile-logout {
+  margin-top: 6px;
+  border-top: 1px solid #e8edf2 !important;
+  padding-top: 14px !important;
+  color: #c62828 !important;
+}
+
+/* ── Responsive ─────────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .navbar__links,
+  .navbar__right {
+    display: none;
+  }
+
+  .navbar__hamburger { display: flex; }
+  .navbar__mobile    { display: flex; }
+
+  .navbar__inner { height: 60px; }
+}

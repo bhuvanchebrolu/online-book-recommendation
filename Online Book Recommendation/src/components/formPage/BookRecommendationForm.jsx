@@ -1,53 +1,59 @@
 import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import axios from "axios";
-import Note from "./Note";
 import "./BookRecommendationForm.css";
 import { bookValidationSchema } from "../../validation/bookValidation";
 import { useMessage } from "../../context/MessageContext";
+import api from "../../utils/axios";
+import Note from "./Note";
+
+const SectionTitle = ({ icon, children }) => (
+  <div className="section-title">
+    <span className="section-title__icon" aria-hidden="true">{icon}</span>
+    {children}
+  </div>
+);
 
 export default function BookRecommendationForm() {
+  const { showMessage } = useMessage();
+
   const initialValues = {
     itemType: "Both",
     title: "",
     author: "",
+    publisher: "",
     year: "",
     isbn: "",
-    publisher: "",
+    format: "",
+    type: "",
+    edition: "",
     quantity: "",
-    currency: "EUR",
+    currency: "INR",
     price: "",
-    category: "",
-    vendor: "",
-    dept: "",
+    recommendation: "",
     notes: "",
+    level: "",
+    courseCode: "",
   };
-  const {showMessage}=useMessage();
+
   const handleSubmit = async (values, { resetForm }) => {
-    // Convert numeric fields to numbers before sending to backend
     const payload = {
       ...values,
       quantity: Number(values.quantity),
       price: Number(values.price),
-      year: values.year ? Number(values.year) : undefined, // optional field
+      year: values.year ? Number(values.year) : undefined,
     };
-
     try {
-      await axios.post("http://localhost:8080/api/recommend", payload);
-      alert("Recommendation submitted successfully!");
-      showMessage("Reccommendation submitted successfully","success");
+      await api.post("/api/recommend", payload);
+      showMessage("Recommendation submitted successfully", "success");
       resetForm();
     } catch (err) {
-      console.log("SERVER ERROR:", err.response?.data);
-      alert(err.response?.data?.message || "Submission failed");
-      showMessage("Submission failed","error");
+      console.error("SERVER ERROR:", err.response?.data);
+      showMessage(err.response?.data?.message || "Submission failed", "error");
     }
   };
 
   return (
     <div className="form-container">
-      <h2>Online Book Recommendation Form</h2>
-
       <Formik
         initialValues={initialValues}
         validationSchema={bookValidationSchema}
@@ -55,138 +61,173 @@ export default function BookRecommendationForm() {
       >
         {({ resetForm }) => (
           <Form className="book-form">
-            <div>
-              {/* Item Type */}
+
+            {/* ── Section 1: Item Details ── */}
+            <div className="form-card">
+              <SectionTitle icon={
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                </svg>
+              }>Book Details</SectionTitle>
+
               <div className="form-group">
-                <label>Item Type:</label>
+                <label>Item Type</label>
                 <Field as="select" name="itemType">
-                  <option>Both</option>
-                  <option>Book</option>
-                  <option>eBook</option>
+                  <option value="Both">Both</option>
+                  <option value="Book">Book</option>
+                  <option value="eBook">eBook</option>
                 </Field>
-                <ErrorMessage name="itemType" component="div" className="error" />
               </div>
 
-              {/* Title */}
-              <div className="form-group">
-                <label>
-                  Title<span className="req">*</span>
-                </label>
-                <Field name="title" />
-                <ErrorMessage name="title" component="div" className="error" />
+              <div className="form-row-2">
+                <div className="form-group">
+                  <label>Title <span className="req">*</span></label>
+                  <Field name="title" placeholder="Enter book title" />
+                  <ErrorMessage name="title" component="div" className="error" />
+                </div>
+                <div className="form-group">
+                  <label>Author / Editor <span className="req">*</span></label>
+                  <Field name="author" placeholder="Author name(s)" />
+                  <ErrorMessage name="author" component="div" className="error" />
+                </div>
               </div>
 
-              {/* Author */}
-              <div className="form-group">
-                <label>
-                  Author<span className="req">*</span>
-                </label>
-                <Field name="author" />
-                <ErrorMessage name="author" component="div" className="error" />
+              <div className="form-row-2">
+                <div className="form-group">
+                  <label>Publisher</label>
+                  <Field name="publisher" placeholder="Publisher name" />
+                </div>
+                <div className="form-group">
+                  <label>Publication Year</label>
+                  <Field name="year" placeholder="e.g. 2023" />
+                  <ErrorMessage name="year" component="div" className="error" />
+                </div>
               </div>
 
-              {/* Year */}
-              <div className="form-group">
-                <label>Publication Year</label>
-                <Field name="year" />
-                <ErrorMessage name="year" component="div" className="error" />
+              <div className="form-row-2">
+                <div className="form-group">
+                  <label>ISBN <span className="req">*</span></label>
+                  <Field name="isbn" placeholder="978-x-xxx-xxxxx-x" />
+                  <ErrorMessage name="isbn" component="div" className="error" />
+                </div>
+                <div className="form-group">
+                  <label>Edition</label>
+                  <Field name="edition" placeholder="e.g. 3rd" />
+                </div>
               </div>
 
-              {/* ISBN */}
-              <div className="form-group">
-                <label>
-                  ISBN<span className="req">*</span>
-                </label>
-                <Field name="isbn" />
-                <ErrorMessage name="isbn" component="div" className="error" />
+              <div className="form-row-2">
+                <div className="form-group">
+                  <label>Format <span className="req">*</span></label>
+                  <Field as="select" name="format">
+                    <option value="">— Select Format —</option>
+                    <option value="Print Book">Print Book</option>
+                    <option value="E-Book">E-Book</option>
+                  </Field>
+                  <ErrorMessage name="format" component="div" className="error" />
+                </div>
+                <div className="form-group">
+                  <label>Book Type <span className="req">*</span></label>
+                  <Field as="select" name="type">
+                    <option value="">— Select Type —</option>
+                    <option value="TextBook">TextBook</option>
+                    <option value="Reference Book">Reference Book</option>
+                    <option value="General Book">General Book</option>
+                  </Field>
+                  <ErrorMessage name="type" component="div" className="error" />
+                </div>
               </div>
+            </div>
 
-              {/* Publisher */}
-              <div className="form-group">
-                <label>Publisher</label>
-                <Field name="publisher" />
-              </div>
+            {/* ── Section 2: Pricing & Quantity ── */}
+            <div className="form-card">
+              <SectionTitle icon={
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                </svg>
+              }>Pricing & Quantity</SectionTitle>
 
-              {/* Row - Quantity, Currency, Price */}
-              <div className="row">
-                <div className="form-group small">
-                  <label>
-                    Quantity<span className="req">*</span>
-                  </label>
-                  <Field name="quantity" />
+              <div className="form-row-3">
+                <div className="form-group">
+                  <label>Quantity <span className="req">*</span></label>
+                  <Field name="quantity" placeholder="e.g. 3" />
                   <ErrorMessage name="quantity" component="div" className="error" />
                 </div>
-
-                <div className="form-group small">
+                <div className="form-group">
                   <label>Currency</label>
                   <Field as="select" name="currency">
-                    <option>EUR</option>
-                    <option>INR</option>
-                    <option>USD</option>
+                    <option value="INR">INR</option>
+                    <option value="USD">USD</option>
+                    <option value="EUR">EUR</option>
                   </Field>
                 </div>
-
-                <div className="form-group small">
-                  <label>
-                    Price<span className="req">*</span>
-                  </label>
-                  <Field name="price" />
+                <div className="form-group">
+                  <label>Price <span className="req">*</span></label>
+                  <Field name="price" placeholder="e.g. 750" />
                   <ErrorMessage name="price" component="div" className="error" />
                 </div>
               </div>
+            </div>
 
-              {/* Category */}
-              <div className="form-group">
-                <label>Collection Category</label>
-                <Field as="select" name="category">
-                  <option value="">--Select Category--</option>
-                  <option>General</option>
-                  <option>Textbook</option>
-                  <option>Reference</option>
-                </Field>
-                <ErrorMessage name="category" component="div" className="error" />
+            {/* ── Section 3: Academic Details ── */}
+            <div className="form-card">
+              <SectionTitle icon={
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/>
+                </svg>
+              }>Academic Information</SectionTitle>
+
+              <div className="form-row-2">
+                <div className="form-group">
+                  <label>Level <span className="req">*</span></label>
+                  <Field as="select" name="level">
+                    <option value="">— Select Level —</option>
+                    <option value="UG">UG</option>
+                    <option value="PG">PG</option>
+                    <option value="PhD">PhD</option>
+                  </Field>
+                  <ErrorMessage name="level" component="div" className="error" />
+                </div>
+                <div className="form-group">
+                  <label>Course Code</label>
+                  <Field name="courseCode" placeholder="e.g. CS3001" />
+                </div>
               </div>
+            </div>
 
-              {/* Vendor */}
+            {/* ── Section 4: Justification ── */}
+            <div className="form-card">
+              <SectionTitle icon={
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+                </svg>
+              }>Justification & Notes</SectionTitle>
+
               <div className="form-group">
-                <label>Vendor (Optional)</label>
-                <Field as="select" name="vendor">
-                  <option value="">--Select Vendor--</option>
-                  <option>Vendor 1</option>
-                  <option>Vendor 2</option>
-                </Field>
+                <label>Recommendation / Justification</label>
+                <Field as="textarea" name="recommendation" rows="4" placeholder="Why do you recommend this book? How will it benefit students?" />
               </div>
-
-              {/* Dept */}
               <div className="form-group">
-                <label>Dept/Centre/School</label>
-                <Field as="select" name="dept">
-                  <option value="">--Select Dept--</option>
-                  <option>Computer Science</option>
-                  <option>Electrical</option>
-                  <option>Mechanical</option>
-                </Field>
-                <ErrorMessage name="dept" component="div" className="error" />
-              </div>
-
-              {/* Notes */}
-              <div className="form-group">
-                <label>Notes</label>
-                <Field as="textarea" name="notes" rows="10" />
+                <label>Additional Notes</label>
+                <Field as="textarea" name="notes" rows="3" placeholder="Any other relevant information..." />
               </div>
             </div>
 
             <Note />
 
-            <div>
-              <button type="submit" className="submit-btn">
-                Submit your suggestion
+            {/* ── Buttons ── */}
+            <div className="btn-row">
+              <button type="submit" className="btn-submit">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/>
+                </svg>
+                Submit Recommendation
               </button>
-
-              <button type="button" onClick={() => resetForm()}>
-                Clear
+              <button type="button" className="btn-clear" onClick={resetForm}>
+                Clear Form
               </button>
             </div>
+
           </Form>
         )}
       </Formik>

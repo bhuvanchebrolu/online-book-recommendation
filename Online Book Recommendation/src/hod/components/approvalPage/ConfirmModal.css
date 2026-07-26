@@ -1,116 +1,154 @@
-/* Modal overlay */
+/* ── Overlay ────────────────────────────────────────────────── */
 .modalOverlay {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(0, 0, 0, 0.35);
+  inset: 0;
+  background: rgba(15, 30, 50, 0.4);
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 999;
-  animation: fadeIn 0.25s ease;
+  z-index: 1000;
+  animation: overlayIn 0.2s ease;
+  padding: 16px;
 }
 
-/* Modal box */
-.modalBox {
-  background: #fff;
-  width: 420px;
-  max-width: 90%;
-  border-radius: 12px;
-  padding: 24px 28px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
-  animation: scaleIn 0.25s ease;
-  overflow: hidden;
-}
-
-/* Modal animations */
-@keyframes fadeIn {
+@keyframes overlayIn {
   from { opacity: 0; }
-  to { opacity: 1; }
+  to   { opacity: 1; }
 }
 
-@keyframes scaleIn {
-  from { transform: scale(0.95); opacity: 0; }
-  to { transform: scale(1); opacity: 1; }
+/* ── Modal box ──────────────────────────────────────────────── */
+.modalBox {
+  background: #ffffff;
+  width: 100%;
+  max-width: 460px;
+  border-radius: 12px;
+  border: 1px solid #e8edf2;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.16);
+  animation: modalIn 0.22s ease;
+  overflow: hidden;
+  font-family: "Segoe UI", sans-serif;
 }
 
-/* Title */
-.modalTitle {
-  font-size: 20px;
+@keyframes modalIn {
+  from { transform: scale(0.96) translateY(8px); opacity: 0; }
+  to   { transform: scale(1)    translateY(0);   opacity: 1; }
+}
+
+/* ── Header ─────────────────────────────────────────────────── */
+.modalHeader {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 24px 24px 16px;
+}
+
+.modalIcon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
   font-weight: 600;
-  margin-bottom: 12px;
-  color: #094074;
+  flex-shrink: 0;
 }
 
-/* Message content */
-.modalMessage {
-  max-height: 200px;
+.modalIcon--approve {
+  background: #e6f9ed;
+  color: #1f6e43;
+}
+
+.modalIcon--reject {
+  background: #fde2e2;
+  color: #b00020;
+}
+
+.modalTitle {
+  font-size: 15px;
+  font-weight: 600;
+  color: #1a3a5c;
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* ── Body ───────────────────────────────────────────────────── */
+.modalBody {
+  padding: 0 24px 20px;
+}
+
+.modalBodyLabel {
+  font-size: 13px;
+  color: #7a93ab;
+  margin: 0 0 10px;
+}
+
+.modalBookList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-height: 180px;
   overflow-y: auto;
-  margin-bottom: 24px;
-  font-size: 14px;
-  color: #333;
-  line-height: 1.5;
-  padding-right: 4px;
+  border: 1px solid #e8edf2;
+  border-radius: 8px;
 }
 
-/* Custom scrollbar for modalMessage */
-.modalMessage::-webkit-scrollbar {
-  width: 6px;
-}
-.modalMessage::-webkit-scrollbar-thumb {
-  background: #ccc;
-  border-radius: 3px;
-}
-.modalMessage::-webkit-scrollbar-track {
-  background: #f0f0f0;
+.modalBookList::-webkit-scrollbar { width: 5px; }
+.modalBookList::-webkit-scrollbar-thumb { background: #d1dce6; border-radius: 3px; }
+
+.modalBookItem {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 10px 14px;
+  border-bottom: 1px solid #f0f4f8;
 }
 
-/* Lists inside modal */
-.modalMessage ul {
-  padding-left: 20px;
-}
-.modalMessage li {
-  margin-bottom: 6px;
-}
+.modalBookItem:last-child { border-bottom: none; }
 
-/* Modal actions */
+.modalBookTitle  { font-size: 13px; font-weight: 500; color: #1e293b; }
+.modalBookAuthor { font-size: 12px; color: #7a93ab; }
+
+/* ── Actions ────────────────────────────────────────────────── */
 .modalActions {
   display: flex;
   justify-content: flex-end;
-  gap: 12px;
+  gap: 10px;
+  padding: 16px 24px;
+  background: #f7f9fc;
+  border-top: 1px solid #e8edf2;
 }
 
-/* Confirm button */
-.confirmBtn {
-  background: linear-gradient(135deg, #dc3545, #ff6b6b);
-  color: #fff;
-  padding: 10px 20px;
-  border: none;
+.modalBtn {
+  padding: 9px 20px;
   border-radius: 8px;
-  cursor: pointer;
+  font-size: 13px;
   font-weight: 500;
-  transition: all 0.3s ease;
-}
-
-.confirmBtn:hover {
-  background: linear-gradient(135deg, #e35b5b, #ff7a7a);
-  transform: translateY(-2px);
-}
-
-/* Cancel button */
-.cancelBtn {
-  background: #ccc;
-  color: #333;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 8px;
   cursor: pointer;
-  transition: all 0.3s ease;
+  font-family: inherit;
+  border: 1.5px solid transparent;
+  transition: all 0.18s;
 }
 
-.cancelBtn:hover {
-  background: #b3b3b3;
-  transform: translateY(-2px);
+.modalBtn:active { transform: scale(0.98); }
+
+.modalBtn--cancel {
+  background: #fff;
+  color: #4a6580;
+  border-color: #d1dce6;
 }
+.modalBtn--cancel:hover { background: #eef3f8; }
+
+.modalBtn--approve {
+  background: #e6f9ed;
+  color: #1f6e43;
+  border-color: #b2dfcc;
+}
+.modalBtn--approve:hover { background: #d0f0de; }
+
+.modalBtn--reject {
+  background: #fde2e2;
+  color: #b00020;
+  border-color: #f5c2c2;
+}
+.modalBtn--reject:hover { background: #fccfcf; }

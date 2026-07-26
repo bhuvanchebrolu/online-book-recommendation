@@ -1,46 +1,90 @@
-/* Container for search row */
+/* ── Search row ─────────────────────────────────────────────── */
 .searchRow {
   display: flex;
   align-items: center;
-  gap: 12px; /* slightly more space for readability */
-  margin: 20px 0;
-  flex-wrap: wrap; /* handles smaller screens */
+  gap: 8px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
 }
 
-/* Input field */
-.searchInput {
-  padding: 8px 14px; /* slightly bigger for comfort */
-  border: 1px solid #b0b0b0; /* softer than #ccc */
-  border-radius: 8px;
-  width: 220px; /* wider for academic site forms */
+/* Input wrapper */
+.searchRow__inputWrap {
+  position: relative;
+  flex: 1;
+  min-width: 200px;
+  max-width: 380px;
+}
+
+.searchRow__icon {
+  position: absolute;
+  left: 11px;
+  top: 50%;
+  transform: translateY(-50%);
   font-size: 14px;
-  transition: border-color 0.3s, box-shadow 0.3s;
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.searchInput {
+  width: 100%;
+  padding: 8px 12px 8px 34px;
+  border: 1.5px solid #d1dce6;
+  border-radius: 8px;
+  font-size: 13px;
+  color: #1e293b;
+  background: #fff;
+  font-family: inherit;
+  outline: none;
+  transition: border-color 0.18s, box-shadow 0.18s;
+  box-sizing: border-box;
 }
 
 .searchInput:focus {
-  outline: none;
-  border-color: #094074; /* matches button */
-  box-shadow: 0 0 5px rgba(9, 64, 116, 0.3);
+  border-color: #2e6da4;
+  box-shadow: 0 0 0 3px rgba(46, 109, 164, 0.1);
 }
 
-/* Button */
-.searchRow button {
-  background-color: #094074;
-  color: #fff;
-  border: none;
-  padding: 8px 18px;
+.searchInput::placeholder { color: #adb5bd; }
+
+/* Divider */
+.searchRow__divider {
+  width: 1px;
+  height: 28px;
+  background: #e2e8f0;
+  margin: 0 4px;
+}
+
+/* Buttons */
+.searchRow__btn {
+  background: #ffffff;
+  color: #4a6580;
+  border: 1.5px solid #d1dce6;
+  padding: 7px 14px;
   border-radius: 8px;
-  cursor: pointer;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 500;
-  transition: background-color 0.3s, transform 0.2s;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.18s;
+  white-space: nowrap;
 }
 
-.searchRow button:hover {
-  background-color: #0c508e; /* slightly lighter on hover */
-  transform: translateY(-1px);
+.searchRow__btn:hover {
+  background: #eef3f8;
+  border-color: #a8bfcf;
+  color: #1a3a5c;
 }
 
-.searchRow button:active {
-  transform: translateY(1px);
+.searchRow__btn:active { transform: scale(0.98); }
+
+.searchRow__btn--primary {
+  background: #1a3a5c;
+  color: #ffffff;
+  border-color: #1a3a5c;
+}
+
+.searchRow__btn--primary:hover {
+  background: #2e5478;
+  border-color: #2e5478;
+  color: #fff;
 }

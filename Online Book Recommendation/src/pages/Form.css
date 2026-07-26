@@ -1,55 +1,14 @@
-/* Main wrapper for the entire form page */
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&display=swap');
+
 .recommendationForm {
   width: 100%;
   min-height: 100vh;
-  background: #f0f4f8; /* soft academic background */
-  padding-top: 20px;
-  padding-bottom: 40px;
-
-  font-family: "Segoe UI", Arial, sans-serif;
-  color: #003366;
+  background: #f0f5fb;
+  font-family: 'DM Sans', sans-serif;
 }
 
-/* Makes sure child components spacing is consistent */
-.recommendationForm > * {
-  margin-bottom: 30px;
-}
-
-/* Smooth fade-in animation for the whole page */
-.recommendationForm {
-  animation: fadeIn 0.4s ease-in-out;
-}
-
-/* Fade in animation */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* For Hero section inside this page */
-.recommendationForm .heroHeading {
-  margin-top: 25px;
-}
-
-/* For form container spacing consistency */
-.recommendationForm .form-container {
-  margin-top: 15px !important;
-}
-
-/* Responsive: reduce page padding on small screens */
 @media (max-width: 600px) {
   .recommendationForm {
-    padding-top: 10px;
-    padding-bottom: 20px;
-  }
-
-  .recommendationForm > * {
-    margin-bottom: 20px;
+    background: #f5f8fc;
   }
 }
