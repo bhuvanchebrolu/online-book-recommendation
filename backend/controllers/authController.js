@@ -39,26 +39,26 @@ export const sendOtp = async (req, res) => {
     console.log(otp);
     const expiry = process.env.OTP_EXPIRY_MINUTES || 10;
 
-    await sendEmail({
-      to:      email,
-      subject: "Your OTP — NITT LibRecommend",
-      html: `
-        <div style="font-family:Arial,sans-serif;max-width:480px;margin:0 auto;padding:32px;border:1px solid #e0e0e0;border-radius:8px;">
-          <div style="text-align:center;margin-bottom:24px;">
-            <span style="font-size:32px;">📚</span>
-            <h2 style="color:#1a3a5c;margin:8px 0 4px;">NITT LibRecommend</h2>
-            <p style="color:#7a93ab;font-size:13px;margin:0;">Email Verification</p>
-          </div>
-          <p style="color:#374151;font-size:14px;">Use the OTP below to verify your email address. It expires in <strong>${expiry} minutes</strong>.</p>
-          <div style="background:#f0f4f8;border-radius:10px;padding:28px;text-align:center;margin:24px 0;">
-            <span style="font-size:40px;font-weight:700;letter-spacing:14px;color:#1a3a5c;">${otp}</span>
-          </div>
-          <p style="color:#adb5bd;font-size:12px;text-align:center;">If you did not request this, please ignore this email.</p>
-          <hr style="border:none;border-top:1px solid #e2e8f0;margin:20px 0;"/>
-          <p style="color:#adb5bd;font-size:11px;text-align:center;">© ${new Date().getFullYear()} National Institute of Technology, Tiruchirappalli</p>
-        </div>
-      `,
-    });
+    // await sendEmail({
+    //   to:      email,
+    //   subject: "Your OTP — NITT LibRecommend",
+    //   html: `
+    //     <div style="font-family:Arial,sans-serif;max-width:480px;margin:0 auto;padding:32px;border:1px solid #e0e0e0;border-radius:8px;">
+    //       <div style="text-align:center;margin-bottom:24px;">
+    //         <span style="font-size:32px;">📚</span>
+    //         <h2 style="color:#1a3a5c;margin:8px 0 4px;">NITT LibRecommend</h2>
+    //         <p style="color:#7a93ab;font-size:13px;margin:0;">Email Verification</p>
+    //       </div>
+    //       <p style="color:#374151;font-size:14px;">Use the OTP below to verify your email address. It expires in <strong>${expiry} minutes</strong>.</p>
+    //       <div style="background:#f0f4f8;border-radius:10px;padding:28px;text-align:center;margin:24px 0;">
+    //         <span style="font-size:40px;font-weight:700;letter-spacing:14px;color:#1a3a5c;">${otp}</span>
+    //       </div>
+    //       <p style="color:#adb5bd;font-size:12px;text-align:center;">If you did not request this, please ignore this email.</p>
+    //       <hr style="border:none;border-top:1px solid #e2e8f0;margin:20px 0;"/>
+    //       <p style="color:#adb5bd;font-size:11px;text-align:center;">© ${new Date().getFullYear()} National Institute of Technology, Tiruchirappalli</p>
+    //     </div>
+    //   `,
+    // });
 
     res.json({ message: "OTP sent to your email" });
   } catch (err) {
