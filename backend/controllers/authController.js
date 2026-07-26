@@ -14,12 +14,11 @@ const signToken = (user) =>
 const setCookie = (res, token) =>
   res.cookie("token", token, {
     httpOnly: true,
-    secure:   false,   // set true in production (HTTPS)
-    sameSite: "lax",
-    maxAge:   7 * 24 * 60 * 60 * 1000,
-    path:     "/",
+    secure: true,
+    sameSite: "none",
+    maxAge: 7 * 24 * 60 * 60 * 1000,
+    path: "/",
   });
-
 // ── STEP 1: Send OTP ─────────────────────────────────────────
 export const sendOtp = async (req, res) => {
   try {
