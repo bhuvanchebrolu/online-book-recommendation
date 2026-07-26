@@ -1,19 +1,29 @@
+/* ── Toast container — floats over the page ─────────────────── */
 .message {
-  max-width: 600px;       /* restrict width */
-  margin: 15px auto;      /* center horizontally */
-  padding: 14px 20px;     
-  border-radius: 8px;
-  font-size: 16px;        /* slightly bigger text */
+  position: fixed;        /* ← key change: no longer in document flow */
+  top: 80px;              /* sits just below the sticky navbar (68px + gap) */
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9999;          /* always on top */
+
+  min-width: 300px;
+  max-width: 560px;
+  width: max-content;
+
+  padding: 14px 44px 14px 20px; /* right padding leaves room for close btn */
+  border-radius: 10px;
+  font-size: 14px;
   font-weight: 500;
   display: flex;
-  justify-content: center; /* center content */
   align-items: center;
-  position: relative;
-  animation: fadeIn 0.3s ease;
-  text-align: center;     /* center text */
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  gap: 10px;
+
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.13);
+  animation: toastIn 0.28s ease;
+  pointer-events: all;
 }
 
+/* ── Variants ───────────────────────────────────────────────── */
 .message.info {
   background-color: #e8f0fe;
   color: #003366;
@@ -32,25 +42,44 @@
   border-left: 5px solid #b00020;
 }
 
+/* ── Close button ───────────────────────────────────────────── */
 .closeBtn {
-  position: absolute;    /* float over the box */
-  top: 8px;
-  right: 10px;
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  transform: translateY(-50%);
   background: none;
   border: none;
   font-size: 18px;
   font-weight: bold;
   cursor: pointer;
   color: inherit;
+  opacity: 0.6;
+  line-height: 1;
+  padding: 0;
+  transition: opacity 0.15s;
 }
 
-@keyframes fadeIn {
+.closeBtn:hover { opacity: 1; }
+
+/* ── Animation ──────────────────────────────────────────────── */
+@keyframes toastIn {
   from {
     opacity: 0;
-    transform: translateY(-5px);
+    transform: translateX(-50%) translateY(-10px);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+/* ── Mobile ─────────────────────────────────────────────────── */
+@media (max-width: 560px) {
+  .message {
+    top: 68px;
+    min-width: unset;
+    width: calc(100% - 32px);
+    max-width: unset;
   }
 }

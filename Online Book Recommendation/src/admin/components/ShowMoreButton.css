@@ -1,0 +1,39 @@
+.showMore {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.showMore button {
+  padding: 8px 20px;
+  font-size: 14px;
+  font-weight: 500;
+
+  background-color: #ffffff;
+  color: #1e3a8a;                 /* academic blue text */
+
+  border: 1px solid #93c5fd;      /* soft blue border */
+  border-radius: 6px;
+
+  cursor: pointer;
+  transition: background-color 0.2s ease,
+              border-color 0.2s ease,
+              box-shadow 0.2s ease;
+}
+
+/* Hover */
+.showMore button:hover {
+  background-color: #eff6ff;      /* light blue tint */
+  border-color: #60a5fa;
+  box-shadow: 0 2px 6px rgba(37, 99, 235, 0.15);
+}
+
+/* Active */
+.showMore button:active {
+  background-color: #dbeafe;
+}
+
+/* Focus (accessibility) */
+.showMore button:focus-visible {
+  outline: 2px solid #2563eb;
+  outline-offset: 2px;
+}

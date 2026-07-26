@@ -1,51 +1,68 @@
-/* Container for bottom action buttons */
+/* ── Bottom actions bar ─────────────────────────────────────── */
 .bottomActions {
-  margin-top: 25px;
   display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 16px 0 4px;
+  border-top: 1px solid #e8edf2;
   flex-wrap: wrap;
+}
+
+.bottomActions__count {
+  font-size: 13px;
+  color: #7a93ab;
+}
+
+.bottomActions__btns {
+  display: flex;
   gap: 10px;
+  flex-wrap: wrap;
 }
 
-/* Base button style */
-.bottomActions button {
-  background-color: #094074;
-  color: #fff;
-  border: none;
-  padding: 10px 20px;
+/* Base action button */
+.actionBtn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 20px;
   border-radius: 8px;
-  cursor: pointer;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 500;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  font-family: inherit;
+  border: 1.5px solid transparent;
+  transition: all 0.18s;
 }
 
-.bottomActions button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+.actionBtn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none !important;
 }
 
-.bottomActions button:active {
-  transform: translateY(1px);
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+.actionBtn:not(:disabled):active { transform: scale(0.98); }
+
+/* Approve */
+.actionBtn--approve {
+  background: #e6f9ed;
+  color: #1f6e43;
+  border-color: #b2dfcc;
 }
 
-/* Approve button */
-.approveBtn {
-  background: linear-gradient(135deg, #28a745, #4cd964);
-  color: #fff !important;
+.actionBtn--approve:not(:disabled):hover {
+  background: #d0f0de;
+  border-color: #88c9a8;
 }
 
-.approveBtn:hover {
-  background: linear-gradient(135deg, #34c759, #5ce280);
+/* Reject */
+.actionBtn--reject {
+  background: #fde2e2;
+  color: #b00020;
+  border-color: #f5c2c2;
 }
 
-/* Reject button */
-.rejectBtn {
-  background: linear-gradient(135deg, #dc3545, #ff6b6b);
-  color: #fff !important;
-}
-
-.rejectBtn:hover {
-  background: linear-gradient(135deg, #e35b5b, #ff7a7a);
+.actionBtn--reject:not(:disabled):hover {
+  background: #fccfcf;
+  border-color: #e89090;
 }

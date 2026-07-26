@@ -1,20 +1,70 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Playfair+Display:wght@600&display=swap');
+
 .homeContainer {
-  width: min(90%, 1100px);       /* cleaner max width */
+  width: min(94%, 1100px);
   margin: 0 auto;
-  padding-top: 28px;
+  padding: 40px 0 60px;
+  font-family: 'DM Sans', sans-serif;
+  animation: fadeIn 0.35s ease-out;
+}
 
-  font-family: "Inter", Arial, sans-serif;
-  color: #1f1f1f;
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
 
-  /* optional: subtle fade-in */
-  animation: fadeIn 0.3s ease-out;
+/* Header row: title left, button right */
+.homeHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  gap: 16px;
+}
+
+.homeHeader__badge {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+  color: #1a5fa8;
+  background: #e8f1fb;
+  border: 1px solid #c2d9f5;
+  padding: 4px 12px;
+  border-radius: 20px;
+  margin-bottom: 10px;
 }
 
 .homeHeading {
-  font-size: 30px;
-  font-weight: 700;
-  color: #003366;               /* academic blue */
-  margin-bottom: 20px;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 2rem;
+  font-weight: 600;
+  color: #0b2545;
+  margin: 0 0 6px;
+  letter-spacing: -0.2px;
+}
 
-  letter-spacing: 0.3px;
+.homeSubtitle {
+  font-size: 0.88rem;
+  color: #6080a0;
+  margin: 0;
+  font-weight: 400;
+}
+
+/* Search + toolbar row */
+.homeControls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 600px) {
+  .homeContainer { padding: 24px 0 40px; }
+  .homeHeading { font-size: 1.6rem; }
+  .homeHeader { flex-direction: column; }
+  .homeControls { flex-direction: column; align-items: stretch; }
 }

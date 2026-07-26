@@ -1,0 +1,39 @@
+.adminContainer {
+  padding: 32px 24px;
+  max-width: 1200px;
+  margin: auto;
+
+  font-family: "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont,
+    sans-serif;
+
+  background-color: #f8fafc; /* subtle page background */
+  min-height: 100vh;
+}
+
+/* Page title */
+.adminContainer h2 {
+  text-align: center;
+  margin-bottom: 8px;
+
+  font-size: 22px;
+  font-weight: 600;
+  color: #1e3a8a; /* academic blue */
+}
+
+/* Subtitle */
+.adminContainer p {
+  text-align: center;
+  margin-bottom: 24px;
+
+  font-size: 14px;
+  color: #475569;
+}
+
+/* Card-like section wrapper (optional) */
+.adminSection {
+  background-color: #ffffff;
+  border-radius: 8px;
+  padding: 20px;
+
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+}

@@ -2,22 +2,44 @@ import React from "react";
 import "./SearchBar.css";
 import { copyTableData, downloadCSV, printTable } from "../../../utils/tableActions";
 
+const SearchBar = ({ search, setSearch, handleSearch, clearSearch, data }) => {
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") handleSearch();
+  };
 
-const SearchBar = ({ search, setSearch ,handleSearch,clearSearch,data}) => {
   return (
     <div className="searchRow">
-      <label>Search:</label>
-      <input
-        className="searchInput"
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-      />
+      {/* Search input */}
+      <div className="searchRow__inputWrap">
+        {/* <span className="searchRow__icon">🔍</span> */}
+        <input
+          className="searchInput"
+          placeholder="Search by title, author, department..."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          onKeyDown={handleKeyDown}
+        />
+      </div>
 
-      <button onClick={handleSearch}>Go</button>
-      <button onClick={clearSearch}>Clear Filter</button>
-      <button onClick={()=>downloadCSV(data)}>CSV</button>
-      <button onClick={()=>copyTableData(data)}>Copy</button>
-      <button onClick={printTable}>Print</button>
+      <button className="searchRow__btn searchRow__btn--primary" onClick={handleSearch}>
+        Search
+      </button>
+      <button className="searchRow__btn" onClick={clearSearch}>
+        Clear
+      </button>
+
+      {/* Divider */}
+      <div className="searchRow__divider" />
+
+      <button className="searchRow__btn" onClick={() => downloadCSV(data)} title="Download CSV">
+        CSV
+      </button>
+      <button className="searchRow__btn" onClick={() => copyTableData(data)} title="Copy to clipboard">
+        Copy
+      </button>
+      <button className="searchRow__btn" onClick={printTable} title="Print">
+        Print
+      </button>
     </div>
   );
 };

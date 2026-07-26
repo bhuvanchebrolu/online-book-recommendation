@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import TopButtons from "../components/approvalPage/TopButtons";
 import SearchBar from "../components/approvalPage/SearchBar";
 import ResultTable from "../components/approvalPage/ResultTable";
 import BottomActions from "../components/approvalPage/BottomActions";
-
 import "./ApprovalPage.css";
 import ConfirmModal from "../components/approvalPage/ConfirmModal";
 import { useMessage } from "../../context/MessageContext";
+import api from "../../utils/axios";
 
 const ApprovalPage = () => {
   const [search, setSearch] = useState("");
@@ -15,62 +14,59 @@ const ApprovalPage = () => {
   const [filtered, setFiltered] = useState([]);
   const [selected, setSelected] = useState([]);
   const [showAll, setShowAll] = useState(false);
-
   const [modalOpen, setModalOpen] = useState(false);
   const [modalAction, setModalAction] = useState("");
 
-  const {showMessage}=useMessage();
+  const { showMessage } = useMessage();
 
   useEffect(() => {
-    axios
-      .get("http://localhost:8080/api/recommend/pending")
+    api
+      .get("/api/recommend/pending")
       .then((res) => {
         setData(res.data);
         setFiltered(res.data);
-        showMessage("Pending recommendations fetched","success");
+        showMessage("Pending recommendations fetched", "success");
       })
-      .catch((err) => {
-        console.log(err);
-        showMessage(err,"error");
-      });
+      .catch(() => showMessage("Failed to fetch recommendations", "error"));
   }, []);
 
   const selectAll = () => {
-    setSelected(filtered.map((item) => item._id));
-    showMessage("Selected All","success");
+    setSelected(filtered.map((item) => item.id));
+    showMessage("Selected all", "success");
   };
-
   const clearAll = () => {
     setSelected([]);
-    showMessage("Cleared All","success");
+    showMessage("Cleared selection", "success");
   };
-
   const displayAll = () => {
     setShowAll(true);
-    showMessage("All the recommendations fetched");
+    showMessage("Showing all recommendations");
   };
 
   const handleSearch = () => {
     const s = search.toLowerCase();
-    const f = data.filter(
-      (item) =>
-        item.title.toLowerCase().includes(s) ||
-        item.author.toLowerCase().includes(s) ||
-        item.itemType.toLowerCase().includes(s) ||
-        item.dept?.toLowerCase().includes(s)
+    setFiltered(
+      data.filter(
+        (item) =>
+          item.title?.toLowerCase().includes(s) ||
+          item.author?.toLowerCase().includes(s) ||
+          item.itemType?.toLowerCase().includes(s) ||
+          item.dept?.toLowerCase().includes(s) ||
+          item.recommendedBy?.name?.toLowerCase().includes(s),
+      ),
     );
-    setFiltered(f);
-    showMessage("Filtered recommendations successfully","success");
+    showMessage("Filtered successfully", "success");
   };
+
   const clearSearch = () => {
     setSearch("");
     setFiltered(data);
-    showMessage("Cleared search box");
+    showMessage("Filter cleared");
   };
 
   const openModal = (action) => {
     if (selected.length === 0) {
-      alert("Please select atleast one book.");
+      showMessage("Please select at least one book", "error");
       return;
     }
     setModalAction(action);
@@ -79,30 +75,28 @@ const ApprovalPage = () => {
 
   const handleConfirm = async () => {
     try {
-      await axios.put("http://localhost:8080/api/recommend/update-status", {
-        ids: selected,
+      await api.put("/api/recommend/update-status", {
+        ids: selected.map(Number),
         status: modalAction === "approve" ? "Approved" : "Rejected",
       });
-
-      alert("Status updated successfully"); 
-      showMessage("Status updated successfully");
-
-      const res=await axios.get("http://localhost:8080/api/recommend/pending");
-
+      showMessage("Status updated successfully", "success");
+      const res = await api.get("/api/recommend/pending");
       setData(res.data);
       setFiltered(res.data);
       setSelected([]);
-    } catch (err) {
-      console.log(err);
-      showMessage(err,"error");
+    } catch {
+      showMessage("Failed to update status", "error");
     }
     setModalOpen(false);
   };
 
   const displayData = showAll ? filtered : filtered.slice(0, 10);
+
   return (
     <div className="hodContainer">
       <h2>Online Book Recommendations</h2>
+      <p className="pageSubtitle">Pending approvals for your department</p>
+
       <TopButtons
         selectAll={selectAll}
         clearAll={clearAll}
@@ -124,21 +118,18 @@ const ApprovalPage = () => {
       <BottomActions
         onApprove={() => openModal("approve")}
         onReject={() => openModal("reject")}
+        selectedCount={selected.length}
       />
 
       <ConfirmModal
         open={modalOpen}
         title={
           modalAction === "approve"
-            ? "Are you sure you want to approve these suggestions ?"
-            : "Are you sure you want to reject these suggestions ?"
+            ? "Approve these recommendations?"
+            : "Reject these recommendations?"
         }
-        books={filtered.filter((b) => selected.includes(b._id))}
-        confirmText={
-          modalAction === "approve"
-            ? "Yes , approve suggestions"
-            : "Yes , reject suggestions "
-        }
+        books={filtered.filter((b) => selected.includes(b.id))}
+        confirmText={modalAction === "approve" ? "Yes, approve" : "Yes, reject"}
         cancelText="Cancel"
         onConfirm={handleConfirm}
         onCancel={() => setModalOpen(false)}

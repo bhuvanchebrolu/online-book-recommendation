@@ -1,0 +1,41 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&display=swap');
+
+.note {
+  background: #fffbeb;
+  border: 1px solid #f5d87a;
+  border-left: 4px solid #e6a817;
+  border-radius: 10px;
+  padding: 18px 22px;
+  margin-bottom: 24px;
+}
+
+.note__header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #7a4f00;
+  margin-bottom: 12px;
+}
+
+.note__header svg {
+  color: #e6a817;
+  flex-shrink: 0;
+}
+
+.note__list {
+  margin: 0;
+  padding-left: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.note__list li {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.875rem;
+  color: #5a3e00;
+  line-height: 1.6;
+}
