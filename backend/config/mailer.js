@@ -1,23 +1,14 @@
 import dotenv from "dotenv";
 dotenv.config();
-import nodemailer from "nodemailer";
+import sgMail from "@sendgrid/mail";
 
-const transporter = nodemailer.createTransport({
-  host:   "smtp.gmail.com",
-  port:   587,
-  secure: false,
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS,
-  },
-  tls: {
-    rejectUnauthorized: false,
-  },
-});
+const apiKey = process.env.SENDGRID_API_KEY;
 
-transporter.verify((error) => {
-  if (error) console.error("SMTP connection error:", error);
-  else console.log("✅ Email server is ready to send messages");
-});
+if (!apiKey) {
+  console.warn("⚠️ SENDGRID_API_KEY is missing in backend/.env!");
+} else {
+  sgMail.setApiKey(apiKey);
+  console.log("✅ SendGrid mail service initialized");
+}
 
-export default transporter;
+export default sgMail;

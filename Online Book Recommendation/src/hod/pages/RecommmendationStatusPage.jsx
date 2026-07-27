@@ -57,12 +57,13 @@ const RecommmendationStatusPage = () => {
   };
 
   const displayed = showAll ? filtered : filtered.slice(0, 10);
+  const approvedOnly = filtered.filter((b) => b.status === "Approved");
 
   return (
     <div className="approvedContainer">
       <div className="approvedHeaderRow">
         <h2>Online Book Recommendation Status</h2>
-        <PrintApprovedBooks data={filtered} user={user} logoUrl={nittLogo} />
+        <PrintApprovedBooks data={approvedOnly} user={user} logoUrl={nittLogo} />
       </div>
 
       <ApprovedSearchBar
